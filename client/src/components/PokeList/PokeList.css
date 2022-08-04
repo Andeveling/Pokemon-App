@@ -1,0 +1,40 @@
+.main__pagination {
+    display: grid;
+    margin-top: 1rem;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 75vw;
+}
+
+.pagination__button {
+    width: 150px;
+    height: 50px;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    font-weight: 900;
+    font-size: 1.1rem;
+    background-color: var(--button);
+    color: var(--text-1);
+
+}
+
+.previous {
+    clip-path: polygon(100% 0%, 100% 100%, 25% 100%, 0% 50%, 25% 0%);
+    text-align: right;
+}
+
+.next {
+    clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 0% 0%);
+    text-align: left;
+    justify-self: end;
+}
+
+.spinner {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}

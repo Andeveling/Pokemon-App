@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;500;800;900&display=swap');
+
+:root {
+  --background-1: #1c2128;
+  --background-2: #22272e;
+  --text-1: #fff;
+  --text-2: #1c2128;
+  --button: #d56723;
+  --fonts-1: 'Montserrat', sans-serif;
+}
+
+h3 {
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+body {
+  background-color: var(--background-1);
+  color: var(--text-1);
+  margin: 0;
+  font-family: var(--fonts-1);
+  box-sizing: border-box;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+a,
+a:visited,
+a:hover,
+a:active {
+  text-decoration: none;
+  color: var(--text-1);
+}
+
+button {
+  border: none;
+  padding: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+
+progress {
+  border-radius: 4px;
+  width: 80%;
+  height: 22px;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+progress::-webkit-progress-bar {
+  background-color: #ffffff;
+  border-radius: 4px;
+}
+
+progress::-webkit-progress-value {
+  background-color: #30a7d7;
+  border-radius: 4px;
+}

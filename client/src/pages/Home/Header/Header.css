@@ -1,0 +1,79 @@
+@import url(../../../index.css);
+
+header {
+    height: fit-content;
+    width: 100%;
+    background-color: #22272e;
+    /*     background-color: #e5e5f7; */
+    opacity: 0.8;
+    background: repeating-linear-gradient(45deg, #22272e, #22272e 5px, #000000 5px, #000000 25px);
+    display: grid;
+    grid-template-columns: 0.3fr min-content 1fr 1fr;
+    gap: 1rem;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 1%;
+}
+
+.header__logo {
+    width: 200px;
+    height: 200px;
+}
+
+.form__pokemon {
+    width: 400px;
+    align-self: center;
+}
+
+.form__pokemon-label {
+    display: block;
+    text-align: left;
+    width: 100%;
+
+}
+
+.form__pokemon-container {
+    width: 100%;
+}
+
+.form__pokemon-input {
+    height: 20px;
+    padding: 1rem;
+    border-radius: 4px;
+    width: 60%;
+    color: var(--text-2)
+}
+
+.form__pokemon-button {
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    margin-left: -5%;
+    background-color: #c43932;
+    color: var(--text-1);
+    font-size: 1.2rem;
+}
+
+.form__pokemon-text {
+    font-weight: 100;
+    font-size: 0.8em;
+}
+
+.header__back-button {
+    width: 60px;
+    height: 50px;
+    clip-path: polygon(100% 0%, 100% 51%, 100% 100%, 25% 100%, 0% 50%, 25% 0%);
+    background-color: #c43932;
+    border-radius: 0;
+    color: var(--text-1);
+    font-size: 1rem;
+    margin-top: 1rem;
+}
+
+.header__back-container {
+    justify-content: start;
+    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr;
+    text-align: left;
+}
