@@ -16,7 +16,7 @@ export async function getPokesApi(page = 0) {
       });
     return response;
   } catch (error) {
-    console.log(error.message);
+    return error;
   }
 }
 

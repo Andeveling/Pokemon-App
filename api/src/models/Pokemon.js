@@ -15,8 +15,8 @@ export const Pokemons = sequelize.define(
       allowNull: false,
       unique: true,
     },
-    typeOne: { type: DataTypes.STRING },
-    typeTwo: { type: DataTypes.STRING },
+    typeOne: { type: DataTypes.STRING, defaultValue: null },
+    typeTwo: { type: DataTypes.STRING, defaultValue: null },
     hp: { type: DataTypes.INTEGER },
     attack: { type: DataTypes.INTEGER },
     defense: { type: DataTypes.INTEGER },
@@ -24,7 +24,7 @@ export const Pokemons = sequelize.define(
     height: { type: DataTypes.INTEGER },
     weight: { type: DataTypes.INTEGER },
     urlImg: { type: DataTypes.STRING },
-    createInDb: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: true },
+    //createInDb: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: true },
   },
   { timestamps: false }
 );

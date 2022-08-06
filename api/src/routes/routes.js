@@ -1,9 +1,8 @@
 import { Router } from "express";
-import { getPokemons, getTypes, addNewPokemon } from "../controllers/index.js";
+import { getPokemons, getTypes, addNewPokemon, getPokemonById } from "../controllers/index.js";
 export const router = Router();
 
-router.get("/pokemons", getPokemons); //All
-router.get("/pokemons/:id", getPokemons); //Params
-router.get("/pokemons", getPokemons); //Query
+router.get("/pokemons", getPokemons); //All✅ and Query
+router.get("/pokemons/:id", getPokemonById); //Params✅
 router.post("/pokemons", addNewPokemon); //Add Pokemon
 router.get("/types", getTypes); //Types
