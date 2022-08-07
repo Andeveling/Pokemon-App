@@ -1,42 +1,36 @@
-import React from "react";
-import axios from "axios";
+import React, { useState } from "react";
 import { FaSearch } from "react-icons/fa";
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux/es/exports";
-import { setPokemonName, setSearched } from "../../../redux/slices/PokemonSlice";
-import { useGetAllPokemonsQuery } from "../../../services/pokemonApi";
+import {
+  setPokemonName,
+  setSearched,
+  setPokemonSearched,
+} from "../../../redux/slices/PokemonSlice";
+import { useSearchParams } from "react-router-dom";
+import SearchButtons from "../../../components/SearchButtons/SearchButtons";
 import "./Header.css";
 
 function Header() {
   const dispatcher = useDispatch();
-  const pokemons = useGetAllPokemonsQuery().data;
   const [pokemonSearch, setPokemonSearch] = useState("");
-  const check = useSelector((state) => state.pokemonStore.isSearched);
+  const [params, setParams] = useSearchParams();
 
-  const handlerInputChanges = (event) => {
+  const check = useSelector((state) => state.pokemonStore.isSearched);
+  const handleInputChanges = (event) => {
     event.preventDefault();
     setPokemonSearch(event.target.value.trim().toLowerCase());
   };
 
-  const handlerSubmit = async (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    async function getDataPokemon(pokemon) {
-      try {
-        const response = axios.get(`http://localhost:3001/pokemons/${pokemon}`);
-        const dataPoke = (await response).data;
-        return dataPoke;
-      } catch (error) {
-        console.log(error.message);
-      }
-    }
-    const dataPoke = await getDataPokemon(pokemonSearch);
-    dispatcher(setPokemonName(dataPoke));
-    dispatcher(setSearched(true));
-    //event.currentTarget.reset();
+    setParams({ name: pokemonSearch });
+    dispatcher(setPokemonSearched(pokemonSearch));
   };
-  const handlerBack = () => {
+
+  const handleBack = () => {
     dispatcher(setPokemonName({}));
     dispatcher(setSearched(false));
+    setParams();
   };
   return (
     <header>
@@ -47,11 +41,11 @@ function Header() {
 
       {/* ACAAAA ESTA EL FILTRO */}
       {check ? (
-        <button className='header__back-button' onClick={() => handlerBack()}>
+        <button className='header__back-button' onClick={() => handleBack()}>
           Back
         </button>
       ) : null}
-      <form className='form__pokemon' onSubmit={(event) => handlerSubmit(event)}>
+      <form className='form__pokemon' onSubmit={(event) => handleSubmit(event)}>
         <div className='header__back-container'>
           <label className='form__pokemon-label' htmlFor='search-pokemon'>
             Search by Name or Number
@@ -63,7 +57,7 @@ function Header() {
             className='form__pokemon-input'
             name='name'
             onChange={(event) => {
-              handlerInputChanges(event);
+              handleInputChanges(event);
             }}
             id='search-pokemon'
             type='text'></input>
@@ -76,6 +70,7 @@ function Header() {
           </p>
         </div>
       </form>
+      <SearchButtons></SearchButtons>
     </header>
   );
 }

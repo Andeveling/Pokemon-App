@@ -1,15 +1,17 @@
-import React, { useEffect } from "react";
-import PokeList from "../../../components/PokeList/PokeList";
-import { pokemonApi } from "../../../services/pokemonApi";
-import PokemonSearched from "../../../components/PokemonSearched";
-import "./Main.css";
+import React from "react";
 import { useSelector } from "react-redux";
+import PokeList from "../../../components/PokeList/PokeList";
+import PokemonSearched from "../../../components/PokemonSearched";
+import PokemonsFilter from "../../../components/PokemonsSearched/PokemonsFilter";
+import "./Main.css";
 
 function Main() {
-  const { isSearched } = useSelector((state) => state.pokemonStore);
+  const { isSearched, render } = useSelector((state) => state.pokemonStore);
 
   if (isSearched) {
     return <PokemonSearched></PokemonSearched>;
+  } else if (render) {
+    return <PokemonsFilter></PokemonsFilter>;
   } else {
     return <PokeList></PokeList>;
   }
