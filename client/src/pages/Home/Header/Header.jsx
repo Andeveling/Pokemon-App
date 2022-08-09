@@ -6,7 +6,7 @@ import {
   setSearched,
   setPokemonSearched,
 } from "../../../redux/slices/PokemonSlice";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, Link } from "react-router-dom";
 import SearchButtons from "../../../components/SearchButtons/SearchButtons";
 import "./Header.css";
 

@@ -152,8 +152,8 @@ El modelo de la base de datos deberá tener las siguientes entidades (Aquellas p
   - ✅Altura
   - ✅Peso
 - [OK] Tipo con las siguientes propiedades:
-  - ID
-  - Nombre
+  - ✅ID
+  - ✅Nombre
 
 La relación entre ambas entidades debe ser de muchos a muchos ya que un pokemon puede pertenecer a más de un tipo y, a su vez, un tipo puede incluir a muchos pokemons.
 
@@ -174,7 +174,7 @@ Se debe desarrollar un servidor en Node/Express con las siguientes rutas:
   - Tener en cuenta que tiene que funcionar tanto para un id de un pokemon existente en pokeapi o uno creado por ustedes
 - [ ] **GET /pokemons?name="..."**:
   - ✅ Obtener el pokemon que coincida exactamente con el nombre pasado como query parameter (Puede ser de pokeapi o creado por nosotros)
-  - Si no existe ningún pokemon mostrar un mensaje adecuado
+  - ✅Si no existe ningún pokemon mostrar un mensaje adecuado
 - [ ] **POST /pokemons**:
   - Recibe los datos recolectados desde el formulario controlado de la ruta de creación de pokemons por body
   - Crea un pokemon en la base de datos relacionado con sus tipos.

@@ -24,7 +24,7 @@ export const Pokemons = sequelize.define(
     height: { type: DataTypes.INTEGER },
     weight: { type: DataTypes.INTEGER },
     urlImg: { type: DataTypes.STRING },
-    //createInDb: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: true },
+    custom: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: true },
   },
   { timestamps: false }
 );

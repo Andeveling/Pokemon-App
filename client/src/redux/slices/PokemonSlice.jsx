@@ -45,6 +45,45 @@ export const pokemonSlice = createSlice({
       state.render = true;
       state.pokemonsRender = pokemonsType;
     },
+    setOrderPokemonsAZ: (state, action) => {
+      const pokemonsAZ = state.pokemonsRender.sort((pokemonA, pokemonB) => {
+        if (pokemonA.name > pokemonB.name) return 1;
+        if (pokemonA.name < pokemonB.name) return -1;
+        return 0;
+      });
+      state.render = true;
+      state.pokemonsRender = pokemonsAZ;
+    },
+    setOrderPokemonsZA: (state, action) => {
+      const pokemonsZA = state.pokemonsRender.sort((pokemonA, pokemonB) => {
+        if (pokemonA.name > pokemonB.name) return -1;
+        if (pokemonA.name < pokemonB.name) return 1;
+        return 0;
+      });
+      state.render = true;
+      state.pokemonsRender = pokemonsZA;
+    },
+    setOrderPokemonsAttackUp: (state, action) => {
+      const pokemonsAttack = state.pokemonsRender.sort((pokemonA, pokemonB) => {
+        if (pokemonA.attack > pokemonB.attack) return -1;
+        if (pokemonA.attack < pokemonB.attack) return 1;
+        return 0;
+      });
+      state.render = true;
+      state.pokemonsRender = pokemonsAttack;
+    },
+    setOrderPokemonsAttackDown: (state, action) => {
+      const pokemonsAttack = state.pokemonsRender.sort((pokemonA, pokemonB) => {
+        if (pokemonA.attack > pokemonB.attack) return 1;
+        if (pokemonA.attack < pokemonB.attack) return -1;
+        return 0;
+      });
+      state.render = true;
+      state.pokemonsRender = pokemonsAttack;
+    },
+    setRender: (state) => {
+      state.pokemonsRender = state.pokemons;
+    },
   },
   // Esta configuracion es necesaria para actualizar el estado de loading dependiendo el estado de la promesa.
 });
@@ -53,7 +92,12 @@ export const {
   loadingPokemons,
   setPokemonName,
   setPokemons,
+  setRender,
   setPokemonsByType,
+  setOrderPokemonsAZ,
+  setOrderPokemonsZA,
+  setOrderPokemonsAttackUp,
+  setOrderPokemonsAttackDown,
   setFrom,
   setSearched,
   setTo,
