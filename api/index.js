@@ -4,7 +4,7 @@ import "./src/models/Pokemon.js";
 
 async function runServer() {
   try {
-    await sequelize.sync({ force: true });
+    await sequelize.sync({ force: false });
     await sequelize.authenticate();
     console.log("Connection has been established successfully.");
     server.listen(server.get("port"));

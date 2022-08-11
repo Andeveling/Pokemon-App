@@ -6,7 +6,9 @@
   --text-1: #fff;
   --text-2: #1c2128;
   --button: #d56723;
+  --button-landing: #1b82b1;
   --fonts-1: 'Montserrat', sans-serif;
+  --button-blue: #00ddff;
 }
 
 h3 {
@@ -61,6 +63,6 @@ progress::-webkit-progress-bar {
 }
 
 progress::-webkit-progress-value {
-  background-color: #30a7d7;
+  background-color: #d73030;
   border-radius: 4px;
 }

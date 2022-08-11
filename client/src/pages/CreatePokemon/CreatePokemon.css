@@ -1,4 +1,63 @@
 .form__container {
     display: flex;
     flex-direction: column;
+    width: 100vw;
+    text-align: center;
+}
+
+.form__create {
+    display: flex;
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form__error {
+    margin: 0;
+    padding: 0;
+    color: darkred;
+    font-size: 0.8rem;
+}
+
+.create__input {
+    width: 300px;
+}
+
+.create__input-type {
+    width: 152px;
+}
+
+.two {
+    margin-left: 10px;
+}
+
+.form__types {
+    display: inline-flex;
+}
+
+.form__item {
+    display: flex;
+    flex-direction: column;
+}
+
+.form__submit-button {
+    height: 60px;
+    margin-top: 1rem;
+    width: 320px;
+}
+
+.form__label {
+    margin-top: 1rem;
+
+}
+
+select,
+input {
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem;
+
 }

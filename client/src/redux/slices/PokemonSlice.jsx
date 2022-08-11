@@ -7,11 +7,9 @@ export const pokemonSlice = createSlice({
     pokemonsRender: [],
     render: false,
     isLoading: false,
-    pokemon: {},
     isSearched: false,
     pokemonSearched: "",
-    from: 0,
-    to: 12,
+    pagination: { from: 0, to: 12 },
   },
   reducers: {
     //Cargar Pokemons
@@ -20,12 +18,6 @@ export const pokemonSlice = createSlice({
     },
     setPokemons: (state, action) => {
       state.pokemons = action.payload;
-    },
-    setFrom: (state, action) => {
-      state.from += action.payload;
-    },
-    setTo: (state, action) => {
-      state.to += action.payload;
     },
     setPokemonName: (state, action) => {
       state.pokemon = action.payload;
@@ -81,6 +73,16 @@ export const pokemonSlice = createSlice({
       state.render = true;
       state.pokemonsRender = pokemonsAttack;
     },
+    filterPokemonCustom: (state) => {
+      const pokemonsCustom = state.pokemons.filter((pokemon) => pokemon.custom === true);
+      state.render = true;
+      state.pokemonsRender = pokemonsCustom;
+    },
+    filterPokemonOriginal: (state) => {
+      const pokemonsOriginal = state.pokemons.filter((pokemon) => pokemon.custom !== true);
+      state.render = true;
+      state.pokemonsRender = pokemonsOriginal;
+    },
     setRender: (state) => {
       state.pokemonsRender = state.pokemons;
     },
@@ -98,9 +100,9 @@ export const {
   setOrderPokemonsZA,
   setOrderPokemonsAttackUp,
   setOrderPokemonsAttackDown,
-  setFrom,
+  filterPokemonCustom,
+  filterPokemonOriginal,
   setSearched,
-  setTo,
   setPokemonSearched,
 } = pokemonSlice.actions;
 //Eso es lo que exporto a la store

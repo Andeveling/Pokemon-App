@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux/es/exports";
 import { useGetAllTypesQuery, selectAllPokemons } from "../../services/pokemonApi";
 import {
@@ -9,6 +9,8 @@ import {
   setOrderPokemonsZA,
   setOrderPokemonsAttackUp,
   setOrderPokemonsAttackDown,
+  filterPokemonCustom,
+  filterPokemonOriginal,
 } from "../../redux/slices/PokemonSlice";
 import { BiCaretUp, BiCaretDown } from "react-icons/bi";
 import "./SearchButons.css";
@@ -24,13 +26,15 @@ const SearchButtons = () => {
     dispatch(setPokemons(pokemons));
     dispatch(setPokemonsByType(type));
   };
-  const orderPokemon = (order) => {
+  const orderPokemon = (value) => {
     dispatch(setPokemons(pokemons));
-    if (order === "A-Z") return dispatch(setOrderPokemonsAZ());
-    if (order === "Z-A") return dispatch(setOrderPokemonsZA());
-    if (order === "ATTACKUP") return dispatch(setOrderPokemonsAttackUp());
-    if (order === "ATTACKDOWN") return dispatch(setOrderPokemonsAttackDown());
-    if (order === "ALL") return dispatch(setRender());
+    if (value === "A-Z") return dispatch(setOrderPokemonsAZ());
+    if (value === "Z-A") return dispatch(setOrderPokemonsZA());
+    if (value === "ATTACKUP") return dispatch(setOrderPokemonsAttackUp());
+    if (value === "ATTACKDOWN") return dispatch(setOrderPokemonsAttackDown());
+    if (value === "ALL") return dispatch(setRender());
+    if (value === "CUSTOM") return dispatch(filterPokemonCustom());
+    if (value === "ORIGINAL") return dispatch(filterPokemonOriginal());
   };
 
   return (
@@ -45,8 +49,12 @@ const SearchButtons = () => {
           {type.name}
         </button>
       ))}
-      <button className='buttonsFilter__button'>custom</button>
-      <button className='buttonsFilter__button'>original</button>
+      <button className='buttonsFilter__button' onClick={() => orderPokemon("CUSTOM")}>
+        custom
+      </button>
+      <button className='buttonsFilter__button' onClick={() => orderPokemon("ORIGINAL")}>
+        original
+      </button>
       <button className='buttonsFilter__button' onClick={() => orderPokemon("A-Z")}>
         A-Z
         <BiCaretUp />

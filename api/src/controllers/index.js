@@ -70,7 +70,7 @@ export async function addNewPokemon(req, res) {
     await Pokemons.create(newPokemon);
     res.json(newPokemon);
   } catch (error) {
-    res.json({ error: error.parent.detail });
+    res.json({ error });
   }
 }
 

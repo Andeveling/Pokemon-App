@@ -31,6 +31,14 @@ export const pokemonApi = createApi({
       query: () => `/types`,
       transformResponse: (response) => response,
     }),
+    addNewPokemon: builder.mutation({
+      query: (body) => ({
+        url: "/pokemons",
+        method: "POST",
+        body: body,
+      }),
+      invalidatesTags: ["Pokemon"],
+    }),
   }),
 });
 //pokemonApi.endpoints.getPokemonName.useQuery({ name });
@@ -39,6 +47,7 @@ export const {
   useGetPokemonIdQuery,
   useGetPokemonNameQuery,
   useGetAllTypesQuery,
+  useAddNewPokemonMutation,
 } = pokemonApi;
 
 // returns the query result object

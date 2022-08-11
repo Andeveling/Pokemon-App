@@ -8,6 +8,7 @@ import {
 } from "../../../redux/slices/PokemonSlice";
 import { useSearchParams, Link } from "react-router-dom";
 import SearchButtons from "../../../components/SearchButtons/SearchButtons";
+import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import "./Header.css";
 
 function Header() {
@@ -33,45 +34,57 @@ function Header() {
     setParams();
   };
   return (
-    <header>
-      <img
-        className='header__logo'
-        alt='Logo'
-        src='https://www.pngplay.com/wp-content/uploads/2/Pokeball-PNG-Photo-Image.png'></img>
+    <>
+      <header>
+        <img
+          className='header__logo'
+          alt='Logo'
+          src='https://www.pngplay.com/wp-content/uploads/2/Pokeball-PNG-Photo-Image.png'></img>
 
-      {/* ACAAAA ESTA EL FILTRO */}
-      {check ? (
-        <button className='header__back-button' onClick={() => handleBack()}>
-          Back
-        </button>
-      ) : null}
-      <form className='form__pokemon' onSubmit={(event) => handleSubmit(event)}>
-        <div className='header__back-container'>
-          <label className='form__pokemon-label' htmlFor='search-pokemon'>
-            Search by Name or Number
-          </label>
-        </div>
-
-        <div className='form__pokemon-container'>
-          <input
-            className='form__pokemon-input'
-            name='name'
-            onChange={(event) => {
-              handleInputChanges(event);
-            }}
-            id='search-pokemon'
-            type='text'></input>
-
-          <button className='form__pokemon-button' type='submit'>
-            <FaSearch></FaSearch>
+        {/* ACAAAA ESTA EL FILTRO */}
+        {check ? (
+          <button className='header__back-button' onClick={() => handleBack()}>
+            Back
           </button>
-          <p className={"form__pokemon-text"}>
-            Use the advanced search to explore Pokemon by type.
-          </p>
-        </div>
-      </form>
-      <SearchButtons></SearchButtons>
-    </header>
+        ) : null}
+        <form className='form__pokemon' onSubmit={(event) => handleSubmit(event)}>
+          <div className='header__back-container'>
+            <label className='form__pokemon-label' htmlFor='search-pokemon'>
+              Search by Name or Number
+            </label>
+          </div>
+
+          <div className='form__pokemon-container'>
+            <input
+              className='form__pokemon-input'
+              name='name'
+              onChange={(event) => {
+                handleInputChanges(event);
+              }}
+              id='search-pokemon'
+              type='text'></input>
+
+            <button className='form__pokemon-button' type='submit'>
+              <FaSearch></FaSearch>
+            </button>
+            <p className={"form__pokemon-text"}>
+              Use the advanced search to explore Pokemon by type.
+            </p>
+          </div>
+        </form>
+      </header>
+      <div className='form__pokemon-buttons'>
+        <SearchButtons></SearchButtons>
+      </div>
+      <div className='pagination'>
+        <button className='pagination__button pagination__button-left'>
+          <AiOutlineLeft />
+        </button>
+        <button className='pagination__button pagination__button-right'>
+          <AiOutlineRight />
+        </button>
+      </div>
+    </>
   );
 }
 

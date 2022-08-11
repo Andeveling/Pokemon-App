@@ -3,11 +3,10 @@
 header {
     height: fit-content;
     background-color: #22272e;
-    /*     background-color: #e5e5f7; */
     opacity: 0.8;
     background: repeating-linear-gradient(45deg, #22272e, #22272e 5px, #000000 5px, #000000 25px);
     display: grid;
-    grid-template-columns: 0.3fr min-content 1fr;
+    grid-template-columns: 0.3fr min-content;
     gap: 1rem;
     padding-left: 5%;
     padding-right: 5%;
@@ -75,4 +74,36 @@ header {
     display: grid;
     grid-template-columns: 1fr;
     text-align: left;
+}
+
+.form__pokemon-buttons {
+    height: auto;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+
+}
+
+.pagination {
+    height: 1rem;
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+
+}
+
+.pagination__button {
+    border-radius: 50%;
+    border: none;
+    background-color: var(--button-blue);
+    color: var(--text-1);
+    font-size: 1.2rem;
+}
+
+.pagination__button-left {
+    margin-left: 5%;
+
+}
+
+.pagination__button-right {
+    margin-right: 5%;
 }

@@ -1,0 +1,9 @@
+.PokemonNoFound {
+    width: 270px;
+    height: 270px;
+}
+
+.PokemonNoFoundImage {
+    width: 200px;
+    /* height: 200px; */
+}

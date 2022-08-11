@@ -1,31 +1,41 @@
 import PokeCard from "../PokeCard/PokeCard";
 import Spinner from "../Spinner/Spinner";
 import { selectAllPokemons } from "../../services/pokemonApi";
-import { useSelector, useDispatch } from "react-redux";
+import { setPokemons, setRender } from "../../redux/slices/PokemonSlice";
+import { useDispatch, useSelector } from "react-redux";
 import "./PokeList.css";
+import { useEffect } from "react";
 
-let pokemons;
+let pokemons = [];
 function PokeList() {
+  const { pokemonsRender, render, pagination } = useSelector((state) => state.pokemonStore);
   const dispatch = useDispatch();
-  //const { data: pokemons = [], isLoading, isSuccess, isError, error } = useGetAllPokemonsQuery();
-  // const { pokemons } = useSelector((state) => state.pokemonStore);
-  let pokemons = useSelector(selectAllPokemons);
-  let content;
-  if (pokemons.length === 0) {
-    content = <Spinner></Spinner>;
-  } else {
-    content = pokemons?.map((pokemon) => (
-      <PokeCard
-        key={pokemon.id}
-        id={pokemon.id}
-        name={pokemon.name}
-        imgUrl={pokemon.imgUrl}
-        typeOne={pokemon.typeOne}
-        typeTwo={pokemon.typeTwo}></PokeCard>
-    ));
-  }
+  pokemons = useSelector(selectAllPokemons);
 
-  return <main className='main__container'>{content}</main>;
+  useEffect(() => {
+    if (pokemons.length > 0) {
+      dispatch(setPokemons(pokemons));
+    }
+  }),
+    [pokemons];
+
+  if (pokemons.length === 0) {
+    return <Spinner></Spinner>;
+  } else {
+    return (
+      <main className='main__container'>
+        {pokemons?.slice(pagination.from, pagination.to).map((pokemon) => (
+          <PokeCard
+            key={pokemon.id}
+            id={pokemon.id}
+            name={pokemon.name}
+            imgUrl={pokemon.imgUrl}
+            typeOne={pokemon.typeOne}
+            typeTwo={pokemon.typeTwo}></PokeCard>
+        ))}
+      </main>
+    );
+  }
 }
 
 export default PokeList;

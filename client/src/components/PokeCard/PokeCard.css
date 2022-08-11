@@ -13,7 +13,7 @@
 }
 
 .pokecard__container:hover {
-    border: solid 3px #060708;
+    border: solid 3px rgba(0, 0, 0, 0.02);
 }
 
 .pokecard__image {

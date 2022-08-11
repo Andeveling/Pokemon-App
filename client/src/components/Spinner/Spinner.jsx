@@ -1,5 +1,5 @@
 import { SpinnerDotted } from "spinners-react";
-
+import "./Spinner.css";
 function Spinner() {
   return (
     <div className='spinner'>
