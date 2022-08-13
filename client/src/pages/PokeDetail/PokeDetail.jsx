@@ -4,6 +4,29 @@ import Spinner from "../../components/Spinner/Spinner";
 import { useGetPokemonIdQuery } from "../../services/pokemonApi";
 import "./PokeDetail.css";
 
+const color = {
+  normal: "#a4acaf",
+  fighting: "#d56723",
+  flying: "#3dc7ef",
+  poison: "#b97fc9",
+  ground: "#847432",
+  rock: "#564a11",
+  bug: "#729f3f",
+  ghost: "#7b62a3",
+  steel: "#9eb7b8",
+  fire: "#fd7d24",
+  water: "#59bdff",
+  grass: "#74993c",
+  electric: "#eed535",
+  psychic: "#f366b9",
+  ice: "#84d1ff",
+  dragon: "#f16e57",
+  dark: "#3c3c3c",
+  fairy: "#fdb9e9",
+  unknown: "#a4acaf",
+  shadow: "#313131",
+};
+
 let maxStats = {
   heal: 255,
   attack: 190,
@@ -30,8 +53,16 @@ function PokeDetail() {
         <div className='pokedetail__container-left'>
           <img className='pokedetail_image' src={data.imgUrl} alt='pokeImage'></img>
           <div>
-            <span className='pokedetail__types'>{data.typeOne}</span>
-            {data.typeTwo ? <span className='pokedetail__types'>{data.typeTwo}</span> : <></>}
+            <span className='pokedetail__types' style={{ backgroundColor: color[data.typeOne] }}>
+              {data.typeOne}
+            </span>
+            {data.typeTwo ? (
+              <span className='pokedetail__types' style={{ backgroundColor: color[data.typeTwo] }}>
+                {data.typeTwo}
+              </span>
+            ) : (
+              <></>
+            )}
           </div>
         </div>
 
@@ -52,19 +83,34 @@ function PokeDetail() {
             <ul>
               <li className='pokedetail_stat'>
                 <h3>Heal Points</h3>
-                <progress min='0' max={maxStats.heal} value={data.hp.toString()}></progress>
+                <div className='pokedetail__bar'>
+                  <progress min='0' max={maxStats.heal} value={data.hp.toString()}></progress>
+                  <span className='number__detail'>{data.hp}</span>
+                </div>
               </li>
               <li className='pokedetail_stat'>
                 <h3>Attack</h3>
-                <progress min='0' max={maxStats.attack} value={data.attack.toString()}></progress>
+                <div className='pokedetail__bar'>
+                  <progress min='0' max={maxStats.attack} value={data.attack.toString()}></progress>
+                  <span className='number__detail'>{data.attack}</span>
+                </div>
               </li>
               <li className='pokedetail_stat'>
                 <h3>Defense</h3>
-                <progress min='0' max={maxStats.defense} value={data.defense.toString()}></progress>
+                <div className='pokedetail__bar'>
+                  <progress
+                    min='0'
+                    max={maxStats.defense}
+                    value={data.defense.toString()}></progress>
+                  <span className='number__detail'>{data.defense}</span>
+                </div>
               </li>
               <li className='pokedetail_stat'>
                 <h3>Speed</h3>
-                <progress min='0' max={maxStats.heal} value={data.speed.toString()}></progress>
+                <div className='pokedetail__bar'>
+                  <progress min='0' max={maxStats.speed} value={data.speed.toString()}></progress>
+                  <span className='number__detail'>{data.speed}</span>
+                </div>
               </li>
             </ul>
           </div>

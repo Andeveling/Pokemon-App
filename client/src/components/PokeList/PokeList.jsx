@@ -1,41 +1,70 @@
 import PokeCard from "../PokeCard/PokeCard";
 import Spinner from "../Spinner/Spinner";
 import { selectAllPokemons } from "../../services/pokemonApi";
-import { setPokemons, setRender } from "../../redux/slices/PokemonSlice";
+import { setPokemons, setCurrentPage } from "../../redux/slices/PokemonSlice";
 import { useDispatch, useSelector } from "react-redux";
-import "./PokeList.css";
 import { useEffect } from "react";
+import "./PokeList.css";
 
-let pokemons = [];
+let pokemondata = [];
 function PokeList() {
-  const { pokemonsRender, render, pagination } = useSelector((state) => state.pokemonStore);
+  const { currentPage } = useSelector((state) => state.pokemonStore);
   const dispatch = useDispatch();
-  pokemons = useSelector(selectAllPokemons);
+  pokemondata = useSelector(selectAllPokemons);
+  /* PAGINATION */
 
+  const paginationPokemon = () => {
+    return pokemondata.slice(currentPage, currentPage + 12);
+  };
+  /* PAGINATION */
+  const next = () => {
+    dispatch(setCurrentPage(12));
+  };
+  const prev = () => {
+    dispatch(setCurrentPage(-12));
+  };
+  /* PAGINATION */
   useEffect(() => {
-    if (pokemons.length > 0) {
-      dispatch(setPokemons(pokemons));
+    if (pokemondata.length > 0) {
+      dispatch(setPokemons(pokemondata));
     }
   }),
-    [pokemons];
+    [pokemondata];
 
-  if (pokemons.length === 0) {
-    return <Spinner></Spinner>;
+  let content;
+  if (pokemondata.length === 0) {
+    content = <Spinner></Spinner>;
   } else {
-    return (
-      <main className='main__container'>
-        {pokemons?.slice(pagination.from, pagination.to).map((pokemon) => (
-          <PokeCard
-            key={pokemon.id}
-            id={pokemon.id}
-            name={pokemon.name}
-            imgUrl={pokemon.imgUrl}
-            typeOne={pokemon.typeOne}
-            typeTwo={pokemon.typeTwo}></PokeCard>
-        ))}
-      </main>
-    );
+    content = paginationPokemon()
+      ?.slice()
+      .map((pokemon) => (
+        <PokeCard
+          key={pokemon.id}
+          id={pokemon.id}
+          name={pokemon.name}
+          imgUrl={pokemon.imgUrl}
+          typeOne={pokemon.typeOne}
+          typeTwo={pokemon.typeTwo}></PokeCard>
+      ));
   }
+
+  return (
+    <>
+      <div className='pagination'>
+        {currentPage > 11 ? (
+          <button onClick={prev} className='pagination__button pagination__button-left'></button>
+        ) : (
+          <div></div>
+        )}
+        {currentPage <= pokemondata.length - 12 ? (
+          <button onClick={next} className='pagination__button pagination__button-right'></button>
+        ) : (
+          <div></div>
+        )}
+      </div>
+      <main className='main__container'>{content}</main>
+    </>
+  );
 }
 
 export default PokeList;

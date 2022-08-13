@@ -11,6 +11,7 @@ import {
   setOrderPokemonsAttackDown,
   filterPokemonCustom,
   filterPokemonOriginal,
+  resetCurrentPage,
 } from "../../redux/slices/PokemonSlice";
 import { BiCaretUp, BiCaretDown } from "react-icons/bi";
 import "./SearchButons.css";
@@ -18,16 +19,17 @@ import "./SearchButons.css";
 let pokemons = [];
 const SearchButtons = () => {
   const dispatch = useDispatch();
-  const { pokemonsRender } = useSelector((state) => state.pokemonStore);
   pokemons = useSelector(selectAllPokemons);
   const { currentData } = useGetAllTypesQuery();
 
   const filterPokemon = (type) => {
     dispatch(setPokemons(pokemons));
+    dispatch(resetCurrentPage());
     dispatch(setPokemonsByType(type));
   };
   const orderPokemon = (value) => {
     dispatch(setPokemons(pokemons));
+    dispatch(resetCurrentPage());
     if (value === "A-Z") return dispatch(setOrderPokemonsAZ());
     if (value === "Z-A") return dispatch(setOrderPokemonsZA());
     if (value === "ATTACKUP") return dispatch(setOrderPokemonsAttackUp());

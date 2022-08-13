@@ -51,8 +51,8 @@ export async function getPokemonById(req, res) {
 
 //Post new Pokemon -> Body
 export async function addNewPokemon(req, res) {
-  const { name, typeOne, typeTwo, attack, defense, speed, hp, height, weight, urlImg } = req.body;
-  const newPokemon = { name, typeOne, typeTwo, attack, defense, speed, hp, height, weight, urlImg };
+  const { name, typeOne, typeTwo, attack, defense, speed, hp, height, weight, imgUrl } = req.body;
+  const newPokemon = { name, typeOne, typeTwo, attack, defense, speed, hp, height, weight, imgUrl };
   try {
     if (
       !name ||
@@ -63,7 +63,7 @@ export async function addNewPokemon(req, res) {
       !hp ||
       !height ||
       !weight ||
-      !urlImg
+      !imgUrl
     ) {
       res.json({ error: "Incomplete information" });
     }

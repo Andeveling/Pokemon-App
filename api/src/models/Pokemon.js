@@ -23,7 +23,7 @@ export const Pokemons = sequelize.define(
     speed: { type: DataTypes.INTEGER },
     height: { type: DataTypes.INTEGER },
     weight: { type: DataTypes.INTEGER },
-    urlImg: { type: DataTypes.STRING },
+    imgUrl: { type: DataTypes.STRING },
     custom: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: true },
   },
   { timestamps: false }

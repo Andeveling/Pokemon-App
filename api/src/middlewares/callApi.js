@@ -1,9 +1,9 @@
 import axios from "axios";
 const URL = "https://pokeapi.co/api/v2/pokemon";
 
-export async function getPokesApi(page = 540) {
+export async function getPokesApi() {
   try {
-    const apiRequest = await axios.get(`${URL}?limit=20&offset=${page}`);
+    const apiRequest = await axios.get(`${URL}?limit=40&offset=350`);
     const pokesApi = apiRequest.data.results;
     let endpoints = [];
     for (let i = 0; i < pokesApi.length; i++) {

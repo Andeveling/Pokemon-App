@@ -15,6 +15,8 @@ function Main() {
   } else {
     return <PokeList></PokeList>;
   }
+
+  //return <PokeList></PokeList>;
 }
 
 export default Main;

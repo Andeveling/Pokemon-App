@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { useAddNewPokemonMutation } from "../services/pokemonApi";
+import { useNavigate } from "react-router-dom";
 
 export const useForm = (initialForm, validateForm) => {
-  const [addNewPokemon, { isLoading }] = useAddNewPokemonMutation();
+  const [addNewPokemon, { isLoading, isSuccess }] = useAddNewPokemonMutation();
+  const navigate = useNavigate();
   const [form, setForm] = useState(initialForm);
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
@@ -27,6 +29,9 @@ export const useForm = (initialForm, validateForm) => {
     } else {
       return;
     }
+    setTimeout(() => {
+      navigate("/home");
+    }, 2000);
   };
 
   return {

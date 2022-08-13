@@ -2,11 +2,12 @@ import React from "react";
 import { useForm } from "../../hooks/useForm";
 import { useGetAllTypesQuery } from "../../services/pokemonApi";
 import { useSearchParams } from "react-router-dom";
+import Spinner from "../../components/Spinner/Spinner";
 import "./CreatePokemon.css";
 
 const initialForm = {
   name: "",
-  typeOne: "normal",
+  typeOne: "",
   typeTwo: "",
   hp: 0,
   attack: 0,
@@ -14,7 +15,7 @@ const initialForm = {
   speed: 0,
   height: 0,
   weight: 0,
-  urlImg: "",
+  imgUrl: "",
 };
 
 const validationsForm = (form) => {
@@ -74,11 +75,14 @@ export const CreateForm = () => {
     );
   });
 
-  const { form, errors, loading, response, handleChange, handleBlur, handleSubmit } = useForm(
+  const { form, errors, loading, handleChange, handleBlur, handleSubmit } = useForm(
     initialForm,
     validationsForm
   );
 
+  if (loading) {
+    return <Spinner></Spinner>;
+  }
   return (
     <form onSubmit={handleSubmit} className='form__create'>
       <label className='form__label' htmlFor='name'>
@@ -92,6 +96,7 @@ export const CreateForm = () => {
         placeholder='enter a name of 3-16 characters'
         onBlur={handleBlur}
         onChange={handleChange}
+        required
         value={form.name}></input>
       {errors.name && <p className='form__error'>{errors.name}</p>}
 
@@ -138,6 +143,7 @@ export const CreateForm = () => {
         className='create__input'
         onBlur={handleBlur}
         onChange={handleChange}
+        required
         value={form.hp}></input>
       {errors.hp && <p className='form__error'>{errors.hp}</p>}
 
@@ -164,6 +170,7 @@ export const CreateForm = () => {
         className='create__input'
         onBlur={handleBlur}
         onChange={handleChange}
+        required
         value={form.defense}></input>
       {errors.defense && <p className='form__error'>{errors.defense}</p>}
 
@@ -177,6 +184,7 @@ export const CreateForm = () => {
         className='create__input'
         onBlur={handleBlur}
         onChange={handleChange}
+        required
         value={form.speed}></input>
       {errors.speed && <p className='form__error'>{errors.speed}</p>}
 
@@ -190,6 +198,7 @@ export const CreateForm = () => {
         className='create__input'
         onBlur={handleBlur}
         onChange={handleChange}
+        required
         value={form.height}></input>
       {errors.height && <p className='form__error'>{errors.height}</p>}
 
@@ -203,21 +212,23 @@ export const CreateForm = () => {
         className='create__input'
         onBlur={handleBlur}
         onChange={handleChange}
+        required
         value={form.weight}></input>
       {errors.weight && <p className='form__error'>{errors.weight}</p>}
 
-      <label className='form__label' htmlFor='urlImg'>
+      <label className='form__label' htmlFor='imgUrl'>
         Image Url
       </label>
       <input
         type='text'
-        id='urlImg'
-        name='urlImg'
+        id='imgUrl'
+        name='imgUrl'
         className='create__input'
         onBlur={handleBlur}
         onChange={handleChange}
-        value={form.urlImg}></input>
-      {errors.urlImg && <p className='form__error'>{errors.urlImg}</p>}
+        required
+        value={form.imgUrl}></input>
+      {errors.imgUrl && <p className='form__error'>{errors.imgUrl}</p>}
 
       <input type='submit' value={"Create a Pokemon!"} className='form__submit-button' />
     </form>

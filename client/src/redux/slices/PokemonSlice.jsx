@@ -9,7 +9,7 @@ export const pokemonSlice = createSlice({
     isLoading: false,
     isSearched: false,
     pokemonSearched: "",
-    pagination: { from: 0, to: 12 },
+    currentPage: 0,
   },
   reducers: {
     //Cargar Pokemons
@@ -18,6 +18,7 @@ export const pokemonSlice = createSlice({
     },
     setPokemons: (state, action) => {
       state.pokemons = action.payload;
+      state.pages = Math.ceil(state.pokemons.length / 12);
     },
     setPokemonName: (state, action) => {
       state.pokemon = action.payload;
@@ -38,6 +39,15 @@ export const pokemonSlice = createSlice({
       state.pokemonsRender = pokemonsType;
     },
     setOrderPokemonsAZ: (state, action) => {
+      if (!state.render) {
+        const pokemonsAZ = state.pokemons.sort((pokemonA, pokemonB) => {
+          if (pokemonA.name > pokemonB.name) return 1;
+          if (pokemonA.name < pokemonB.name) return -1;
+          return 0;
+        });
+        state.render = true;
+        state.pokemonsRender = pokemonsAZ;
+      }
       const pokemonsAZ = state.pokemonsRender.sort((pokemonA, pokemonB) => {
         if (pokemonA.name > pokemonB.name) return 1;
         if (pokemonA.name < pokemonB.name) return -1;
@@ -47,6 +57,15 @@ export const pokemonSlice = createSlice({
       state.pokemonsRender = pokemonsAZ;
     },
     setOrderPokemonsZA: (state, action) => {
+      if (!state.render) {
+        const pokemonsZA = state.pokemons.sort((pokemonA, pokemonB) => {
+          if (pokemonA.name > pokemonB.name) return -1;
+          if (pokemonA.name < pokemonB.name) return 1;
+          return 0;
+        });
+        state.render = true;
+        state.pokemonsRender = pokemonsZA;
+      }
       const pokemonsZA = state.pokemonsRender.sort((pokemonA, pokemonB) => {
         if (pokemonA.name > pokemonB.name) return -1;
         if (pokemonA.name < pokemonB.name) return 1;
@@ -56,6 +75,15 @@ export const pokemonSlice = createSlice({
       state.pokemonsRender = pokemonsZA;
     },
     setOrderPokemonsAttackUp: (state, action) => {
+      if (!state.render) {
+        const pokemonsAttack = state.pokemons.sort((pokemonA, pokemonB) => {
+          if (pokemonA.attack > pokemonB.attack) return -1;
+          if (pokemonA.attack < pokemonB.attack) return 1;
+          return 0;
+        });
+        state.render = true;
+        state.pokemonsRender = pokemonsAttack;
+      }
       const pokemonsAttack = state.pokemonsRender.sort((pokemonA, pokemonB) => {
         if (pokemonA.attack > pokemonB.attack) return -1;
         if (pokemonA.attack < pokemonB.attack) return 1;
@@ -65,6 +93,15 @@ export const pokemonSlice = createSlice({
       state.pokemonsRender = pokemonsAttack;
     },
     setOrderPokemonsAttackDown: (state, action) => {
+      if (!state.render) {
+        const pokemonsAttack = state.pokemons.sort((pokemonA, pokemonB) => {
+          if (pokemonA.attack > pokemonB.attack) return 1;
+          if (pokemonA.attack < pokemonB.attack) return -1;
+          return 0;
+        });
+        state.render = true;
+        state.pokemonsRender = pokemonsAttack;
+      }
       const pokemonsAttack = state.pokemonsRender.sort((pokemonA, pokemonB) => {
         if (pokemonA.attack > pokemonB.attack) return 1;
         if (pokemonA.attack < pokemonB.attack) return -1;
@@ -86,6 +123,12 @@ export const pokemonSlice = createSlice({
     setRender: (state) => {
       state.pokemonsRender = state.pokemons;
     },
+    setCurrentPage: (state, action) => {
+      state.currentPage = state.currentPage + action.payload;
+    },
+    resetCurrentPage: (state) => {
+      state.currentPage = 0;
+    },
   },
   // Esta configuracion es necesaria para actualizar el estado de loading dependiendo el estado de la promesa.
 });
@@ -104,6 +147,8 @@ export const {
   filterPokemonOriginal,
   setSearched,
   setPokemonSearched,
+  setCurrentPage,
+  resetCurrentPage,
 } = pokemonSlice.actions;
 //Eso es lo que exporto a la store
 export default pokemonSlice.reducer;

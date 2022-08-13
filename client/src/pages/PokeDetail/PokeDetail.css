@@ -76,3 +76,15 @@
         margin-bottom: 2rem;
     }
 }
+
+.pokedetail__bar {
+    display: inline-flex;
+    width: 100%;
+    align-items: center;
+}
+
+.number__detail {
+    font-weight: 100;
+    font-size: 1.4rem;
+    margin-left: 1rem;
+}
