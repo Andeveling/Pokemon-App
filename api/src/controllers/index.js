@@ -13,9 +13,11 @@ export async function getPokemons(req, res) {
       const pokemonDB = await Pokemons.findOne({ where: { name: name } });
       if (pokemonDB) return res.json(pokemonDB);
       const pokemonByName = await PokeApiGetInfo(URL + name);
-      return res.json(pokemonByName);
+      res.json(pokemonByName);
+      return;
     } catch (error) {
-      return res.status(404).send(error.message);
+      res.status(404).json(error);
+      return;
     }
   }
   /* GET POKEMON BY NAME */
@@ -24,8 +26,10 @@ export async function getPokemons(req, res) {
     let allPokemons = await axios.all([getPokesApi(), getPokesDB()]);
     let allPokemonsFlat = allPokemons.flat(1);
     res.json(allPokemonsFlat);
+    return;
   } catch (error) {
     res.json(error);
+    return;
   }
   /* GET ALL POKEMONS */
 }
@@ -41,10 +45,10 @@ export async function getPokemonById(req, res) {
       const pokemonByID = await PokeApiGetInfo(URL + id);
       return res.json(pokemonByID);
     } catch (error) {
-      return res.json({ msg: "Pokemon not found" });
+      return res.status(404).json({ msg: "Pokemon not found" });
     }
   } else {
-    return res.json({ msg: "Pokemon not found" });
+    return res.status(404).json({ msg: "Pokemon not found" });
   }
   /* GET POKEMON BY ID */
 }
@@ -65,12 +69,15 @@ export async function addNewPokemon(req, res) {
       !weight ||
       !imgUrl
     ) {
-      res.json({ error: "Incomplete information" });
+      return res.json({ error: "Incomplete information" });
     }
+
     await Pokemons.create(newPokemon);
-    res.json(newPokemon);
+    res.status(200).json(newPokemon);
+    return;
   } catch (error) {
-    res.json({ error });
+    res.json(error);
+    return;
   }
 }
 

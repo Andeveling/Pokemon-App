@@ -3,7 +3,7 @@ const URL = "https://pokeapi.co/api/v2/pokemon";
 
 export async function getPokesApi() {
   try {
-    const apiRequest = await axios.get(`${URL}?limit=40&offset=350`);
+    const apiRequest = await axios.get(`${URL}?limit=80&offset=251`);
     const pokesApi = apiRequest.data.results;
     let endpoints = [];
     for (let i = 0; i < pokesApi.length; i++) {

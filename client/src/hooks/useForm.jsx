@@ -29,9 +29,8 @@ export const useForm = (initialForm, validateForm) => {
     } else {
       return;
     }
-    setTimeout(() => {
-      navigate("/home");
-    }, 2000);
+    alert("Pokemon create!");
+    navigate("/home");
   };
 
   return {

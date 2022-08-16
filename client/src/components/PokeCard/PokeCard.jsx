@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const color = {
   normal: "#a4acaf",
-  fighting: "#d56723",
+  fighting: "#783834",
   flying: "#3dc7ef",
   poison: "#b97fc9",
   ground: "#847432",

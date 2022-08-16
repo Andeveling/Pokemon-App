@@ -2,9 +2,9 @@ import { sequelize } from "./src/database/database.js";
 import { server } from "./src/app.js";
 import "./src/models/Pokemon.js";
 
-async function runServer() {
+export async function runServer() {
   try {
-    await sequelize.sync({ force: false });
+    await sequelize.sync({ force: true });
     await sequelize.authenticate();
     console.log("Connection has been established successfully.");
     server.listen(server.get("port"));
