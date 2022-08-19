@@ -18,7 +18,6 @@ export const pokemonSlice = createSlice({
     },
     setPokemons: (state, action) => {
       state.pokemons = action.payload;
-      state.pages = Math.ceil(state.pokemons.length / 12);
     },
     setPokemonName: (state, action) => {
       state.pokemon = action.payload;

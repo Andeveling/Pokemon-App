@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import PokeList from "../../../components/PokeList/PokeList";
-import PokemonSearched from "../../../components/PokemonSearched";
+import PokemonSearched from "../../../components/PokemonSearched/PokemonSearched";
 import PokemonsFilter from "../../../components/PokemonsSearched/PokemonsFilter";
 import "./Main.css";
 

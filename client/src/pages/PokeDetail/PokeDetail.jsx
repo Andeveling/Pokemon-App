@@ -38,13 +38,14 @@ function PokeDetail() {
   const { id } = useParams();
   const { data, error, isLoading } = useGetPokemonIdQuery(id);
 
+  let content;
   if (error) {
-    return <h1>Oh no, there was an error</h1>;
+    content = <h1>Oh no, there was an error</h1>;
   } else if (isLoading) {
-    return <Spinner></Spinner>;
+    content = <Spinner></Spinner>;
   } else if (data) {
-    return (
-      <div className='pokedetail__container'>
+    content = (
+      <>
         <h1 className='pokedetail__name'>
           {data.name.charAt(0).toUpperCase() + data.name.slice(1)}
           <span className='pokedetail__id'> #{data.id}</span>
@@ -115,11 +116,10 @@ function PokeDetail() {
             </ul>
           </div>
         </div>
-      </div>
+      </>
     );
-  } else {
-    return null;
   }
+  return <div className='pokedetail__container'>{content}</div>;
 }
 
 export default PokeDetail;

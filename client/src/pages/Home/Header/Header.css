@@ -6,11 +6,18 @@ header {
     opacity: 0.8;
     background: repeating-linear-gradient(45deg, #22272e, #22272e 5px, #000000 5px, #000000 25px);
     display: grid;
-    grid-template-columns: 0.3fr min-content;
+    grid-template-columns: 0.3fr 1fr;
     gap: 1rem;
     padding-left: 5%;
     padding-right: 5%;
     padding-top: 1%;
+}
+
+@media (max-width: 570px) {
+    header {
+        grid-template-columns: 1fr;
+        justify-content: center;
+    }
 }
 
 .header__logo {

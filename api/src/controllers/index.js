@@ -10,14 +10,12 @@ export async function getPokemons(req, res) {
   const { name } = req.query;
   if (name) {
     try {
-      const pokemonDB = await Pokemons.findOne({ where: { name: name } });
+      const pokemonDB = await getPokeByNameDB(name);
       if (pokemonDB) return res.json(pokemonDB);
       const pokemonByName = await PokeApiGetInfo(URL + name);
-      res.json(pokemonByName);
-      return;
+      return res.json(pokemonByName);
     } catch (error) {
-      res.status(404).json(error);
-      return;
+      return res.status(404).json(error);
     }
   }
   /* GET POKEMON BY NAME */
@@ -45,10 +43,10 @@ export async function getPokemonById(req, res) {
       const pokemonByID = await PokeApiGetInfo(URL + id);
       return res.json(pokemonByID);
     } catch (error) {
-      return res.status(404).json({ msg: "Pokemon not found" });
+      return res.status(404).json(error);
     }
   } else {
-    return res.status(404).json({ msg: "Pokemon not found" });
+    return res.status(404).json(error);
   }
   /* GET POKEMON BY ID */
 }

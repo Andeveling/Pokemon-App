@@ -6,31 +6,49 @@ import {
   setSearched,
   setPokemonSearched,
 } from "../../../redux/slices/PokemonSlice";
-import { useSearchParams, Link } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import SearchButtons from "../../../components/SearchButtons/SearchButtons";
 import "./Header.css";
 
 function Header() {
   const dispatcher = useDispatch();
-  const [pokemonSearch, setPokemonSearch] = useState("");
   const [params, setParams] = useSearchParams();
-
+  const [pokemon, setPokemon] = useState({ name: "" });
+  const [errorsForm, setErrorsForm] = useState({});
   const check = useSelector((state) => state.pokemonStore.isSearched);
-  const handleInputChanges = (event) => {
-    event.preventDefault();
-    setPokemonSearch(event.target.value.trim().toLowerCase());
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setErrorsForm(validations(value));
+    console.log(value);
+    setPokemon({ [name]: value.toLowerCase() });
+  };
+
+  const validations = (e) => {
+    let errors = {};
+    let regexName = /[A-Za-z]$/;
+    if (!regexName.test(e.trim())) {
+      errors.name = "Sorry, only accepts letters. Try typing the name again!";
+    }
+    if (!e) errors = {};
+    return errors;
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setParams({ name: pokemonSearch });
-    dispatcher(setPokemonSearched(pokemonSearch));
+    if (Object.keys(errorsForm).length === 0) {
+      setParams({ name: pokemon.name });
+      dispatcher(setPokemonSearched(pokemon.name));
+    } else {
+      return;
+    }
   };
 
   const handleBack = () => {
     dispatcher(setPokemonName({}));
     dispatcher(setSearched(false));
     setParams();
+    setErrorsForm({});
   };
   return (
     <>
@@ -41,10 +59,10 @@ function Header() {
           src='https://www.pngplay.com/wp-content/uploads/2/Pokeball-PNG-Photo-Image.png'></img>
 
         <div className='header__form-button'>
-          <form className='form__pokemon' onSubmit={(event) => handleSubmit(event)}>
+          <form className='form__pokemon' onSubmit={(e) => handleSubmit(e)}>
             <div className='header__back-container'>
               <label className='form__pokemon-label' htmlFor='search-pokemon'>
-                Search by Name or Number
+                Search by Name
               </label>
             </div>
 
@@ -52,15 +70,14 @@ function Header() {
               <input
                 className='form__pokemon-input'
                 name='name'
-                onChange={(event) => {
-                  handleInputChanges(event);
-                }}
+                onChange={(e) => handleChange(e)}
                 id='search-pokemon'
                 type='text'></input>
 
               <button className='form__pokemon-button' type='submit'>
                 <FaSearch></FaSearch>
               </button>
+              {errorsForm.name && <p className='form__error'>{errorsForm.name}</p>}
               <p className={"form__pokemon-text"}>
                 Use the advanced search to explore Pokemon by type.
               </p>

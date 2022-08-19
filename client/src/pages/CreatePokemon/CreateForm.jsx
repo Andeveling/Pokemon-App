@@ -60,6 +60,11 @@ const validationsForm = (form) => {
   } else if (form.weight <= 0 || form.weight > 1000) {
     errors.weight = "statistic must be a number between 1 and 1000";
   }
+  if (!form.typeOne) {
+    errors.typeOne = "Type One is require";
+  } else if (form.typeTwo === form.typeOne) {
+    errors.typeTwo = "Type Two is not equal to type One";
+  }
 
   return errors;
 };
@@ -132,6 +137,8 @@ export const CreateForm = () => {
           </select>
         </div>
       </div>
+      {errors.typeOne && <p className='form__error'>{errors.typeOne}</p>}
+      {errors.typeTwo && <p className='form__error'>{errors.typeTwo}</p>}
 
       <label className='form__label' htmlFor='hp'>
         Heal
