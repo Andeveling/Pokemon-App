@@ -69,7 +69,9 @@ export async function addNewPokemon(req, res) {
     ) {
       return res.json({ error: "Incomplete information" });
     }
-
+    if (typeTwo === "null") {
+      typeTwo = null;
+    }
     await Pokemons.create(newPokemon);
     res.status(200).json(newPokemon);
     return;

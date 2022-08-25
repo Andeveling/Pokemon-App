@@ -71,7 +71,8 @@ const validationsForm = (form) => {
 
 export const CreateForm = () => {
   const [search, setSearch] = useSearchParams("");
-  const { currentData, data, isLoading, isSuccess } = useGetAllTypesQuery();
+  const { currentData, data, isLoading, isSuccess, isError, error } = useGetAllTypesQuery();
+
   const datalist = currentData?.map((type) => {
     return (
       <option key={type.id} value={type.name}>

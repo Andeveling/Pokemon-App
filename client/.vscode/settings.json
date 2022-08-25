@@ -1,0 +1,14 @@
+{
+  "cSpell.words": ["addpokemon", "Pokemons"],
+  "workbench.colorCustomizations": {
+    "activityBar.activeBackground": "#0066cc",
+    "activityBar.activeBorder": "#ff80bf",
+    "activityBar.background": "#0066cc",
+    "activityBar.foreground": "#e7e7e7",
+    "activityBar.inactiveForeground": "#e7e7e799",
+    "activityBarBadge.background": "#ff80bf",
+    "activityBarBadge.foreground": "#15202b",
+    "sash.hoverBorder": "#0066cc"
+  },
+  "peacock.color": "#007fff"
+}

@@ -11,9 +11,7 @@ function LandingPage() {
       <img className='landing__logo' src={logo} alt='Pokemon Logo'></img>
       <img className='landing__teamPoke' src={teamPokemon} alt='Pokemon Landing'></img>
       <Link to={"/home"}>
-        <button className='landing__button'>
-          Lets Go to Pokemon App <AiOutlineRight></AiOutlineRight>
-        </button>
+        <button className='landing__button'>Lets Go to Pokemon App!</button>
       </Link>
     </div>
   );

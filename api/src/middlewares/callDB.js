@@ -1,4 +1,3 @@
-import axios from "axios";
 import { Pokemons, Types } from "../models/Pokemon.js";
 
 export async function getPokesDB() {

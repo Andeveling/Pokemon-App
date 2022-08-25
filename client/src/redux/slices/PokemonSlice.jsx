@@ -10,6 +10,7 @@ export const pokemonSlice = createSlice({
     isSearched: false,
     pokemonSearched: "",
     currentPage: 0,
+    page: 1,
   },
   reducers: {
     //Cargar Pokemons
@@ -31,9 +32,10 @@ export const pokemonSlice = createSlice({
       state.isSearched = true;
     },
     setPokemonsByType: (state, action) => {
-      const pokemonsType = state.pokemons.filter(
+      const pokemonsType = state.pokemons?.filter(
         (pokemon) => pokemon.typeOne === action.payload || pokemon.typeTwo === action.payload
       );
+
       state.render = true;
       state.pokemonsRender = pokemonsType;
     },
@@ -124,6 +126,11 @@ export const pokemonSlice = createSlice({
     },
     setCurrentPage: (state, action) => {
       state.currentPage = state.currentPage + action.payload;
+      if (action.payload < 12) {
+        state.page--;
+      } else {
+        state.page++;
+      }
     },
     resetCurrentPage: (state) => {
       state.currentPage = 0;

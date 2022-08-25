@@ -8,7 +8,7 @@ import "./PokeList.css";
 
 let pokemondata = [];
 function PokeList() {
-  const { currentPage } = useSelector((state) => state.pokemonStore);
+  const { currentPage, page } = useSelector((state) => state.pokemonStore);
   const dispatch = useDispatch();
   pokemondata = useSelector(selectAllPokemons);
   /* PAGINATION */
@@ -56,12 +56,14 @@ function PokeList() {
         ) : (
           <div></div>
         )}
+        {/*  <h2>Page {page}</h2> */}
         {currentPage <= pokemondata.length - 12 ? (
           <button onClick={next} className='pagination__button pagination__button-right'></button>
         ) : (
           <div></div>
         )}
       </div>
+
       <main className='main__container'>{content}</main>
     </>
   );

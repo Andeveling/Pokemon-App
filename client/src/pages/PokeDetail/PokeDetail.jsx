@@ -2,6 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import Spinner from "../../components/Spinner/Spinner";
 import { useGetPokemonIdQuery } from "../../services/pokemonApi";
+import { useNavigate } from "react-router-dom";
 import "./PokeDetail.css";
 
 const color = {
@@ -36,19 +37,24 @@ let maxStats = {
 
 function PokeDetail() {
   const { id } = useParams();
-  const { data, error, isLoading } = useGetPokemonIdQuery(id);
+  const navigate = useNavigate();
+  const { data, isSuccess, error, isLoading } = useGetPokemonIdQuery(id);
 
   let content;
   if (error) {
     content = <h1>Oh no, there was an error</h1>;
   } else if (isLoading) {
     content = <Spinner></Spinner>;
-  } else if (data) {
+  } else if (isSuccess) {
     content = (
       <>
         <h1 className='pokedetail__name'>
           {data.name.charAt(0).toUpperCase() + data.name.slice(1)}
           <span className='pokedetail__id'> #{data.id}</span>
+
+          <button className='button__back-detail' onClick={() => navigate(-1)}>
+            Back
+          </button>
         </h1>
 
         <div className='pokedetail__container-left'>
@@ -69,7 +75,7 @@ function PokeDetail() {
 
         <div className='pokedetail__container-right'>
           <p className='pokedetail__description'>
-            This is a data get of Api for henry personal Project
+            This is a pokemon detail get of Api for henry personal Project
           </p>
           <div className='pokedetail__stats-container'>
             <div className='pokedetail__HW'>
