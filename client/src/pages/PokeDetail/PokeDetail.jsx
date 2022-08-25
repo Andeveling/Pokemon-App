@@ -92,6 +92,7 @@ function PokeDetail() {
                 <h3>Heal Points</h3>
                 <div className='pokedetail__bar'>
                   <progress min='0' max={maxStats.heal} value={data.hp.toString()}></progress>
+
                   <span className='number__detail'>{data.hp}</span>
                 </div>
               </li>
