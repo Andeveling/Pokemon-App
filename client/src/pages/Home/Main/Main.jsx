@@ -9,14 +9,13 @@ function Main() {
   const { isSearched, render } = useSelector((state) => state.pokemonStore);
 
   if (isSearched) {
-    return <PokemonSearched></PokemonSearched>;
+    return <PokemonSearched/>;
   } else if (render) {
-    return <PokemonsFilter></PokemonsFilter>;
+    return <PokemonsFilter/>;
   } else {
-    return <PokeList></PokeList>;
+    return <PokeList/>;
   }
 
-  //return <PokeList></PokeList>;
 }
 
 export default Main;
